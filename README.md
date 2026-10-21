@@ -6,7 +6,7 @@ Phạm Duy Thịnh – B25DCTV072 – Lập trình Web
 
 ## Chức năng
 
-- Xem danh sách sinh viên, có đủ 3 trạng thái: đang tải / lỗi (có nút Thử lại) / dữ liệu
+- Xem danh sách sinh viên, có đủ 3 trạng thái: đang tải / lỗi / có dữ liệu
 - Thêm, sửa, xóa sinh viên (form có validate)
 - Tìm kiếm theo mã SV, họ tên, lớp, có debounce 400ms
 - Chuyển giao diện sáng/tối bằng `ThemeContext`, lưu lựa chọn vào localStorage

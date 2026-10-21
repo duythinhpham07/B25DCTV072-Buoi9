@@ -43,6 +43,11 @@ src/
     └── StudentTable.jsx
 ```
 
+## Dữ liệu
+
+Danh sách lớp D25CQTV02-B (họ tên, mã SV) lấy từ S-Link. **Email và GPA là dữ liệu giả lập cho bài tập, không phải điểm thật.**
+URL mockapi không đưa vào repo, em gửi kèm khi nộp bài.
+
 ## Chạy
 
 1. Tạo resource `students` trên [mockapi.io](https://mockapi.io) với các trường: `studentCode`, `fullName`, `className`, `email` (string) và `gpa` (number).

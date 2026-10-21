@@ -68,7 +68,7 @@ export default function StudentForm({ editing, saving, onSubmit, onCancel }) {
       <h2>{editing ? 'Sửa sinh viên' : 'Thêm sinh viên'}</h2>
       {field('studentCode', 'Mã SV', { ref: firstInputRef, placeholder: 'B25DCTV072' })}
       {field('fullName', 'Họ tên', { placeholder: 'Nguyễn Văn A' })}
-      {field('className', 'Lớp', { placeholder: 'D25CQTV01' })}
+      {field('className', 'Lớp', { placeholder: 'D25CQTV02-B' })}
       {field('email', 'Email', { type: 'email', placeholder: 'a@stu.ptit.edu.vn' })}
       {field('gpa', 'GPA (hệ 4)', { type: 'number', step: '0.01', min: 0, max: 4 })}
 

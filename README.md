@@ -1,16 +1,57 @@
-# React + Vite
+# Buổi 9 – Quản lý sinh viên (Function Component + Hooks)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Phạm Duy Thịnh – B25DCTV072 – Lập trình Web
 
-Currently, two official plugins are available:
+Ứng dụng quản lý sinh viên viết hoàn toàn bằng Function Component và Hooks (không có Class Component). Dữ liệu lấy từ mockapi.io.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Chức năng
 
-## React Compiler
+- Xem danh sách sinh viên, có đủ 3 trạng thái: đang tải / lỗi (có nút Thử lại) / dữ liệu
+- Thêm, sửa, xóa sinh viên (form có validate)
+- Tìm kiếm theo mã SV, họ tên, lớp, có debounce 400ms
+- Chuyển giao diện sáng/tối bằng `ThemeContext`, lưu lựa chọn vào localStorage
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Hooks sử dụng
 
-## Expanding the Oxlint configuration
+| Hook | Dùng ở đâu |
+|---|---|
+| `useState` | state form, danh sách, từ khóa, theme |
+| `useEffect` | gọi API (`[url, reloadKey]`), debounce (`[value, delay]`), đổi `document.title` (`[students.length]`), áp theme (`[theme]`), focus khi sửa (`[editing]`) |
+| `useRef` | focus ô Mã SV khi bấm Sửa |
+| `useContext` | `useTheme()` đọc `ThemeContext`, `ThemeToggle` lấy theme mà không cần prop drilling |
+| `useMemo`, `useCallback` | lọc danh sách, giữ hàm `refetch` ổn định |
+| Custom hook | `useFetch`, `useDebounce`, `useTheme` |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Cấu trúc
+
+```
+src/
+├── api.js                  # gọi POST / PUT / DELETE
+├── App.jsx
+├── context/
+│   ├── ThemeContext.js     # createContext
+│   └── ThemeProvider.jsx   # Provider sáng/tối
+├── hooks/
+│   ├── useFetch.js         # data / loading / error + cleanup AbortController
+│   ├── useDebounce.js
+│   └── useTheme.js
+└── components/
+    ├── Header.jsx
+    ├── ThemeToggle.jsx
+    ├── SearchBox.jsx
+    ├── StudentForm.jsx
+    └── StudentTable.jsx
+```
+
+## Chạy
+
+1. Tạo resource `students` trên [mockapi.io](https://mockapi.io) với các trường: `studentCode`, `fullName`, `className`, `email` (string) và `gpa` (number).
+2. Copy `.env.example` thành `.env`, rồi điền endpoint:
+   ```
+   VITE_API_URL=https://<project-id>.mockapi.io/api/v1/students
+   ```
+3. Cài và chạy:
+   ```
+   npm install
+   npm run dev
+   ```

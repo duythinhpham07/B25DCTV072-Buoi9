@@ -22,7 +22,7 @@ export default function StudentTable({ students, editingId, onEdit, onDelete }) 
               <td>{s.studentCode}</td>
               <td>{s.fullName}</td>
               <td>{s.className}</td>
-              <td>{s.email}</td>
+              <td className="email" title={s.email}>{s.email}</td>
               <td className="num">{Number(s.gpa).toFixed(2)}</td>
               <td>
                 <div className="row-actions">

@@ -1,41 +1,33 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-// Custom hook: gom logic gọi API + 3 trạng thái data / loading / error
 export default function useFetch(url) {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [reloadKey, setReloadKey] = useState(0)
 
   useEffect(() => {
-    if (!url) return
+    let ignore = false
 
-    const controller = new AbortController()
-
-    async function load() {
-      setLoading(true)
-      setError(null)
+    async function fetchData() {
       try {
-        const res = await fetch(url, { signal: controller.signal })
-        if (!res.ok) throw new Error(`Máy chủ trả về lỗi ${res.status}`)
-        setData(await res.json())
+        const res = await fetch(url)
+        if (!res.ok) throw new Error('Lỗi ' + res.status)
+        const json = await res.json()
+        if (!ignore) setData(json)
       } catch (err) {
-        if (err.name !== 'AbortError') setError(err.message)
+        if (!ignore) setError(err.message)
       } finally {
-        if (!controller.signal.aborted) setLoading(false)
+        if (!ignore) setLoading(false)
       }
     }
 
-    load()
-    // Cleanup: hủy request cũ khi url đổi hoặc component bị gỡ
-    return () => controller.abort()
-  }, [url, reloadKey])
+    fetchData()
 
-  const refetch = useCallback(() => setReloadKey((k) => k + 1), [])
+    // cleanup: bỏ qua kết quả cũ nếu url đổi hoặc component bị gỡ
+    return () => {
+      ignore = true
+    }
+  }, [url])
 
-  if (!url) {
-    return { data, setData, loading: false, error: 'Chưa cấu hình VITE_API_URL trong file .env', refetch }
-  }
-
-  return { data, setData, loading, error, refetch }
+  return { data, setData, loading, error }
 }

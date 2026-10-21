@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
-// Trả về value sau khi người dùng ngừng thay đổi `delay` ms
-export default function useDebounce(value, delay = 400) {
+export default function useDebounce(value, delay) {
   const [debounced, setDebounced] = useState(value)
 
   useEffect(() => {

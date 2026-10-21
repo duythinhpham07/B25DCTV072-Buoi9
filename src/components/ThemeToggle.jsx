@@ -1,17 +1,12 @@
-import useTheme from '../hooks/useTheme'
+import { useContext } from 'react'
+import { ThemeContext } from '../context/ThemeContext'
 
 export default function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
-  const isDark = theme === 'dark'
+  const { theme, toggleTheme } = useContext(ThemeContext)
 
   return (
-    <button
-      type="button"
-      className="btn btn-ghost"
-      onClick={toggleTheme}
-      aria-label={isDark ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối'}
-    >
-      {isDark ? '☀️ Sáng' : '🌙 Tối'}
+    <button className="btn" onClick={toggleTheme}>
+      {theme === 'light' ? '🌙 Tối' : '☀️ Sáng'}
     </button>
   )
 }

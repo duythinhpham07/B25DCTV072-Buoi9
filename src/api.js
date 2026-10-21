@@ -1,19 +1,15 @@
 export const API_URL = import.meta.env.VITE_API_URL
 
-async function request(url, options = {}) {
+async function request(url, method, body) {
   const res = await fetch(url, {
+    method,
     headers: { 'Content-Type': 'application/json' },
-    ...options,
+    body: body ? JSON.stringify(body) : undefined,
   })
-  if (!res.ok) throw new Error(`Máy chủ trả về lỗi ${res.status}`)
+  if (!res.ok) throw new Error('Lỗi ' + res.status)
   return res.json()
 }
 
-export const createStudent = (student) =>
-  request(API_URL, { method: 'POST', body: JSON.stringify(student) })
-
-export const updateStudent = (id, student) =>
-  request(`${API_URL}/${id}`, { method: 'PUT', body: JSON.stringify(student) })
-
-export const deleteStudent = (id) =>
-  request(`${API_URL}/${id}`, { method: 'DELETE' })
+export const addStudent = (student) => request(API_URL, 'POST', student)
+export const updateStudent = (id, student) => request(`${API_URL}/${id}`, 'PUT', student)
+export const deleteStudent = (id) => request(`${API_URL}/${id}`, 'DELETE')

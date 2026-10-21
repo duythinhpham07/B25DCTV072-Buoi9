@@ -2,13 +2,10 @@
   --bg: #f4f6fb;
   --surface: #ffffff;
   --text: #1c2333;
-  --muted: #5e6b85;
   --border: #dde2ec;
   --primary: #c8102e;
   --primary-text: #ffffff;
   --danger: #b42318;
-  --danger-bg: #fdecea;
-  --row-active: #fff3f4;
   --shadow: 0 1px 3px rgba(20, 30, 60, 0.08);
   color-scheme: light;
 }
@@ -17,13 +14,10 @@
   --bg: #12151c;
   --surface: #1c212b;
   --text: #e6e9f0;
-  --muted: #9aa4b8;
   --border: #2e3542;
   --primary: #ff5a6e;
   --primary-text: #1a0b0e;
   --danger: #ff8a80;
-  --danger-bg: #3a1e1e;
-  --row-active: #2b2026;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   color-scheme: dark;
 }
@@ -68,11 +62,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-.muted {
-  color: var(--muted);
-  margin: 4px 0 0;
-}
-
 .layout {
   display: flex;
   gap: 20px;
@@ -91,7 +80,12 @@ h2 {
   flex: 0 0 300px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
+}
+
+.form label {
+  margin-top: 8px;
+  font-size: 0.9rem;
 }
 
 .list {
@@ -100,13 +94,6 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 0.9rem;
 }
 
 .input {
@@ -123,17 +110,14 @@ h2 {
   outline-offset: 1px;
 }
 
-.input-error {
-  border-color: var(--danger);
-}
-
-.error-text {
-  color: var(--danger);
-}
-
 .actions {
   display: flex;
   gap: 8px;
+  margin-top: 12px;
+}
+
+.error {
+  color: var(--danger);
 }
 
 .btn {
@@ -146,20 +130,11 @@ h2 {
   cursor: pointer;
 }
 
-.btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
 .btn-primary {
   background: var(--primary);
   border-color: var(--primary);
   color: var(--primary-text);
   font-weight: 600;
-}
-
-.btn-ghost {
-  background: transparent;
 }
 
 .btn-small {
@@ -169,23 +144,6 @@ h2 {
 
 .btn-danger {
   color: var(--danger);
-}
-
-.alert {
-  background: var(--danger-bg);
-  color: var(--danger);
-  padding: 10px 12px;
-  border-radius: 8px;
-  margin: 0;
-}
-
-.alert p {
-  margin: 0 0 8px;
-}
-
-.status,
-.empty {
-  padding: 16px 0;
 }
 
 .table-wrap {
@@ -206,29 +164,19 @@ h2 {
   white-space: nowrap;
 }
 
-.table th {
-  color: var(--muted);
-  font-weight: 600;
-}
-
 .table .email {
   max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.table .num {
-  text-align: right;
+.table td button + button {
+  margin-left: 6px;
 }
 
-.row-active {
-  background: var(--row-active);
-}
-
-.row-actions {
-  display: flex;
-  gap: 6px;
-  justify-content: flex-end;
+.table th {
+  opacity: 0.7;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {

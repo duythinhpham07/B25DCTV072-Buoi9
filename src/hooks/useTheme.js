@@ -1,8 +1,0 @@
-import { useContext } from 'react'
-import ThemeContext from '../context/ThemeContext'
-
-export default function useTheme() {
-  const ctx = useContext(ThemeContext)
-  if (!ctx) throw new Error('useTheme phải dùng bên trong <ThemeProvider>')
-  return ctx
-}

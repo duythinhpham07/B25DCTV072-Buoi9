@@ -13,32 +13,24 @@ Phạm Duy Thịnh – B25DCTV072 – Lập trình Web
 
 ## Hooks sử dụng
 
-| Hook | Dùng ở đâu |
-|---|---|
-| `useState` | state form, danh sách, từ khóa, theme |
-| `useEffect` | gọi API (`[url, reloadKey]`), debounce (`[value, delay]`), đổi `document.title` (`[students.length]`), áp theme (`[theme]`), focus khi sửa (`[editing]`) |
-| `useRef` | focus ô Mã SV khi bấm Sửa |
-| `useContext` | `useTheme()` đọc `ThemeContext`, `ThemeToggle` lấy theme mà không cần prop drilling |
-| `useMemo`, `useCallback` | lọc danh sách, giữ hàm `refetch` ổn định |
-| Custom hook | `useFetch`, `useDebounce`, `useTheme` |
+- `useState`: state form, danh sách, từ khóa tìm kiếm, theme
+- `useEffect`: gọi API, debounce tìm kiếm, đổi `document.title`, lưu theme, focus ô input khi sửa
+- `useRef`: focus vào ô Mã SV khi bấm Sửa
+- `useContext`: `ThemeToggle` lấy theme từ `ThemeContext`, không phải truyền props qua nhiều tầng
+- Custom hook: `useFetch` (data / loading / error), `useDebounce`
 
 ## Cấu trúc
 
 ```
 src/
-├── api.js                  # gọi POST / PUT / DELETE
+├── api.js                 # thêm / sửa / xóa qua mockapi
 ├── App.jsx
-├── context/
-│   ├── ThemeContext.js     # createContext
-│   └── ThemeProvider.jsx   # Provider sáng/tối
-├── hooks/
-│   ├── useFetch.js         # data / loading / error + cleanup AbortController
-│   ├── useDebounce.js
-│   └── useTheme.js
+├── context/ThemeContext.jsx
+├── hooks/useFetch.js
+├── hooks/useDebounce.js
 └── components/
     ├── Header.jsx
     ├── ThemeToggle.jsx
-    ├── SearchBox.jsx
     ├── StudentForm.jsx
     └── StudentTable.jsx
 ```
